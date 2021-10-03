@@ -63,7 +63,8 @@ router.put("/:id", async (req, res) => {
             );
             return;
           }
-        res.status(200).json(workouts);   
+        
+        res.status(200).json(workout);   
     } catch (err) {
         res.status(500).json(err);
     }
