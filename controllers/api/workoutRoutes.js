@@ -29,6 +29,8 @@ router.get("/", async (req, res) => {
                     totalDuration: {
                         $sum: '$exercises.duration'
                     },
+                    totalWeight:
+                    { $sum: '$exercises.weight' }
                 },
             },
         ]);
@@ -60,8 +62,31 @@ router.put("/:id", async (req, res) => {
           }
         res.status(200).json(workouts);   
     } catch (err) {
-    res.status(500).json(err);
+        res.status(500).json(err);
     }
 });
+
+router.post("/", async (req, res) => {
+    try{
+    const workout = await Workout.create(req.body);
+    res.status(200).json(workout);   
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+router.delete("/:id", async (req, res) => {
+    try{
+        const workout = await Workout.findByIdAndRemove(
+            {
+                _id: req.params.id,
+            }
+        );
+    res.status(200).json(workout);   
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
 
 module.exports = router;
