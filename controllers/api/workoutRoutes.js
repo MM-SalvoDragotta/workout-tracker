@@ -12,8 +12,11 @@ router.get("/range", async (req, res) => {
                 },
             },
             {
-                $sort: { day: 1 }  
-            }
+                $sort: { day: -1 }  
+            },
+            {
+                $limit: 7
+            },
         ]);
         res.status(200).json(allWorkouts)   
     } catch (err) {
