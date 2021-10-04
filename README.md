@@ -43,7 +43,7 @@ You can view the deployed App at this link. [Workout Tracker deployed](https://w
 
 💾    
 
-- This application need node.js, please refer to [Offical website](https://nodejs.org/en/download/) for installation
+- This application need node.js, please refer to the [Official website](https://nodejs.org/en/download/) for installation
 - This application also need to install mongodb, please refer to [mongodb](https://coding-boot-camp.github.io/full-stack/mongodb/how-to-install-mongodb) for installation
 - Install required node packages by running the following at the root of your project
 
