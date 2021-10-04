@@ -1,11 +1,4 @@
-const mongoose = require('mongoose');
-const db = require('../models');
-
-mongoose.connect('mongodb://localhost/workout', {
-  useNewUrlParser: true,
-  useFindAndModify: false,
-  useUnifiedTopology: true,
-});
+const MongoClient = require("mongodb").MongoClient;
 
 const workoutSeed = [
   {
@@ -125,13 +118,23 @@ const workoutSeed = [
   },
 ];
 
-db.Workout.deleteMany({})
-  .then(() => db.Workout.collection.insertMany(workoutSeed))
-  .then((data) => {
-    console.log(data.result.n + ' records inserted!');
-    process.exit(0);
-  })
-  .catch((err) => {
-    console.error(err);
-    process.exit(1);
+async function seedDB() {
+  // Connection URL
+  const uri = "mongodb+srv://salvo-admin:fBArdAFhJxY2rFvT@workout-tracker.apzvc.mongodb.net/workoutsDB?retryWrites=true&w=majority";
+  const client = new MongoClient(uri, {
+    useNewUrlParser: true,
+    // useUnifiedTopology: true,
   });
+
+  try {
+    await client.connect();
+    console.log("Connected correctly to server");
+    const collection = await client.db("workoutsDB").collection("workouts");
+    await collection.insertMany(workoutSeed);
+    console.log("Database seeded! :)");
+    client.close();
+} catch (err) {
+    console.log(err.stack);
+}
+}
+seedDB();
