@@ -130,7 +130,7 @@ async function seedDB() {
   try {
     await client.connect();
     console.log("Connected correctly to server");
-    const collection = await client.db("workoutsDB").collection("workouts");
+    const collection = await client.db(process.env.DB).collection(process.env.COLLECTION);
     await collection.insertMany(workoutSeed);
     console.log("Database seeded! :)");
     client.close();
