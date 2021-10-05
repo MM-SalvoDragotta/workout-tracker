@@ -134,9 +134,9 @@ async function seedDB() {
     await collection.insertMany(workoutSeed);
     console.log("Database seeded! :)");
     client.close();
-} catch (err) {
-    console.log(err.stack);
-}
+  } catch (err) {
+      console.log(err.stack);
+  }
 }
 
 seedDB();
