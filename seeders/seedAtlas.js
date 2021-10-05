@@ -138,4 +138,5 @@ async function seedDB() {
     console.log(err.stack);
 }
 }
+
 seedDB();
